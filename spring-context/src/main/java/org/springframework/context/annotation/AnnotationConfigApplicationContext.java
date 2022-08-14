@@ -88,8 +88,11 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
+		// 调用构造函数（因为有继承关系，所以会一直往上执行父类的构造函数）
 		this();
+		// 注册我们自己的配置类
 		register(componentClasses);
+		// IOC 容器刷新
 		refresh();
 	}
 

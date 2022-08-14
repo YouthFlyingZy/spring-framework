@@ -243,6 +243,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * Create a new AbstractApplicationContext with no parent.
 	 */
+	/**
+	 * 创建一个新的没有父类的 AbstractApplicationContext。
+	 */
 	public AbstractApplicationContext() {
 		this.resourcePatternResolver = getResourcePatternResolver();
 	}
@@ -481,6 +484,15 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * will delegate to the ResourcePatternResolver.
 	 * @return the ResourcePatternResolver for this context
 	 * @see #getResources
+	 * @see org.springframework.core.io.support.PathMatchingResourcePatternResolver
+	 */
+	/**
+	 * 返回用于解析位置模式的 ResourcePatternResolver 转换为资源实例。默认是一个
+	 * {@link org.springframework.core.io.support.PathMatchingResourcePatternResolver},
+	 * 支持 Ant 风格的定位模式。可以在子类中重写，用于扩展解析策略，例如在 web 环境中。当需要解析位置模式时不要
+	 * 调用该函数 ，调用上下文的 {@code getResources} 方法，将委托给 ResourcePatternResolver。
+	 * @return 这个上下文的 ResourcePatternResolver
+	 * @see # getresource
 	 * @see org.springframework.core.io.support.PathMatchingResourcePatternResolver
 	 */
 	protected ResourcePatternResolver getResourcePatternResolver() {

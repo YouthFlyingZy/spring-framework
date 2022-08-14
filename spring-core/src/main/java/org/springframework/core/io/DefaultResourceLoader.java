@@ -63,6 +63,12 @@ public class DefaultResourceLoader implements ResourceLoader {
 	 * a specific ClassLoader to {@link #DefaultResourceLoader(ClassLoader)}.
 	 * @see java.lang.Thread#getContextClassLoader()
 	 */
+	/**
+	 * 创建一个新的 DefaultResourceLoader。
+	 * ClassLoader 访问将使用线程上下文类加载器发生在实际访问资源时(5.3起)。
+	 * 为了更多的控制，通过指定一个 ClassLoader 到 {@link #DefaultResourceLoader(ClassLoader)}。
+	 * @see java.lang.Thread # getContextClassLoader ()
+	 */
 	public DefaultResourceLoader() {
 	}
 

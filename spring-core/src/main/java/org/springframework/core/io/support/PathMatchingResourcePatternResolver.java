@@ -221,6 +221,11 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 	 * @param resourceLoader the ResourceLoader to load root directories and
 	 * actual resources with
 	 */
+	/**
+	 * 创建一个新的 PathMatchingResourcePatternResolver
+	 * ClassLoader 访问将通过线程上下文类加载器发生。
+	 * @param resourceLoader resourceLoader 加载根目录和实际资源
+	 */
 	public PathMatchingResourcePatternResolver(ResourceLoader resourceLoader) {
 		Assert.notNull(resourceLoader, "ResourceLoader must not be null");
 		this.resourceLoader = resourceLoader;
