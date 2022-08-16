@@ -117,6 +117,16 @@ import org.springframework.util.StringUtils;
  * @see #getBean
  * @see #resolveDependency
  */
+/**
+ * Spring 对 {@link ConfigurableListableBeanFactory} 和 {@link BeanDefinitionRegistry} 接口的默认实现:
+ * 一个成熟的 bean 工厂，基于 bean 定义元数据，可通过后置处理器扩展。
+ * 典型的用法是先注册所有 bean 定义(可能从 bean 定义文件读取)，然后访问 bean。
+ *  因此，在本地的 bean 定义表中按名称查找 Bean 和对预解析 bean 定义元数据对象进行操作是非常简便的。
+ * 请注意，特定 bean 定义格式的读取器通常是单独实现，而不是作为 bean 工厂的子类:参见示例
+ * {@link org.springframework.beans.factory.xml.XmlBeanDefinitionReader}。
+ * {@link org.springframework.beans.factory.ListableBeanFactory} 接口的另一种实现 ,
+ * 看看 {@link StaticListableBeanFactory}，它管理现有的 bean 实例，而不是根据 bean 定义创建新的实例。
+ */
 @SuppressWarnings("serial")
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory
 		implements ConfigurableListableBeanFactory, BeanDefinitionRegistry, Serializable {
@@ -190,7 +200,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 * Create a new DefaultListableBeanFactory.
 	 */
 	/**
-	 * 创建一个新的DefaultListableBeanFactory。
+	 * 创建一个新的 DefaultListableBeanFactory。
 	 */
 	public DefaultListableBeanFactory() {
 		super();

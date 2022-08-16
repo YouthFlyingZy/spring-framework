@@ -125,6 +125,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		implements AutowireCapableBeanFactory {
 
 	/** Strategy for creating bean instances. */
+	/** 创建 bean 实例的策略 */
 	private InstantiationStrategy instantiationStrategy;
 
 	/** Resolver strategy for method parameter names. */

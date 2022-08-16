@@ -19,6 +19,9 @@ package org.springframework.context.annotation;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
+import org.springframework.beans.factory.BeanClassLoaderAware;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinitionCustomizer;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -88,7 +91,14 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
-		// 调用构造函数（因为有继承关系，所以会一直往上执行父类的构造函数）
+		/**
+		 * 调用构造函数（因为有继承关系，所以会一直往上执行父类的构造函数）
+		 * 创建默认的 bean 工厂 {@link DefaultListableBeanFactory}
+		 * 忽略部分特定接口的自动装配（由于接口有多个类实现，无法确定使用那个自动装配，这部分 spring 有另外的管理机制），默认的有
+		 * {@link BeanNameAware}，{@link BeanFactoryAware}，{@link BeanClassLoaderAware}，可自行另外配置增加相关需求的类或者接口。
+		 * 同时创建了 BeanFactories 默认对象实例化策略 {@link org.springframework.beans.factory.support.CglibSubclassingInstantiationStrategy}，
+		 * 如果需要方法，使用 CGLIB 动态生成子类方法注入。
+		 */
 		this();
 		// 注册我们自己的配置类
 		register(componentClasses);
