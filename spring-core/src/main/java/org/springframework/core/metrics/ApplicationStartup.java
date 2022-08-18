@@ -40,6 +40,11 @@ public interface ApplicationStartup {
 	 * the same step during application startup.
 	 * @param name the step name
 	 */
+	/**
+	 * 创建一个新的步骤并标志着它的开始。
+	 * 步骤名称描述当前操作或阶段。这一技术 name 的命名空间应该是“.”，并且可以重复使用来描述的其他实例在应用程序启动时相同的步骤。
+	 * @param name 步骤名
+	 */
 	StartupStep start(String name);
 
 }

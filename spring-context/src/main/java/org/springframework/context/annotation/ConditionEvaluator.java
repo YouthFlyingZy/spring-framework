@@ -45,6 +45,9 @@ import org.springframework.util.MultiValueMap;
  * @author Juergen Hoeller
  * @since 4.0
  */
+/**
+ * 用于处理 {@link Conditional} 的内部类。
+ */
 class ConditionEvaluator {
 
 	private final ConditionContextImpl context;
@@ -128,6 +131,9 @@ class ConditionEvaluator {
 
 	/**
 	 * Implementation of a {@link ConditionContext}.
+	 */
+	/**
+	 * {@link ConditionContext} 的实现。
 	 */
 	private static class ConditionContextImpl implements ConditionContext {
 

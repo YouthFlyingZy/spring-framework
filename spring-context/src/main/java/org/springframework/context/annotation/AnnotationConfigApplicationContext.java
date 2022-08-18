@@ -67,6 +67,10 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * Create a new AnnotationConfigApplicationContext that needs to be populated
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
 	 */
+	/**
+	 * 创建一个新的需要填充的 AnnotationConfigApplicationContext
+	 * 通过 {@link #register} 调用，然后手动 {@linkplain #refresh refresh}。
+	 */
 	public AnnotationConfigApplicationContext() {
 		StartupStep createAnnotatedBeanDefReader = this.getApplicationStartup().start("spring.context.annotated-bean-reader.create");
 		this.reader = new AnnotatedBeanDefinitionReader(this);
@@ -172,6 +176,13 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * {@link Configuration @Configuration} classes
 	 * @see #scan(String...)
 	 * @see #refresh()
+	 */
+	/**
+	 * 注册一个或多个要处理的组件类。
+	 * 注意:{@link #refresh()} 必须按照上下文的顺序调用来完全处理新类。
+	 * @param componentClasses 一个或多个组件类，例如 {@link Configuration @Configuration} 类
+	 * * @see #scan(String…)
+	 * * @see # refresh ()
 	 */
 	@Override
 	public void register(Class<?>... componentClasses) {

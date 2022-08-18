@@ -29,6 +29,9 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 4.0
  */
+/**
+ * 用于 {@link Condition} 实现的上下文信息。
+ */
 public interface ConditionContext {
 
 	/**

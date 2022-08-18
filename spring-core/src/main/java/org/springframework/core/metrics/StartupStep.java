@@ -36,6 +36,16 @@ import org.springframework.lang.Nullable;
  * @author Brian Clozel
  * @since 5.3
  */
+/**
+ * 步骤记录关于在 {@link ApplicationStartup} 期间发生的特定阶段或操作的指标。
+ * {@code StartupStep} 的生命周期如下:
+ * 步骤通过调用  {@link ApplicationStartup#start(String) the application startup} 来创建和启动，且被分配一个唯一的 {@link StartupStep#getId() id}。
+ * 我们可以在处理过程中使用 {@link Tags} 附加信息
+ * 然后需要标记 {@link #end()} 的步骤
+ * <p>
+ * 实现可以跟踪 “执行时间” 或步骤的其他指标。
+ * <p>
+ */
 public interface StartupStep {
 
 	/**

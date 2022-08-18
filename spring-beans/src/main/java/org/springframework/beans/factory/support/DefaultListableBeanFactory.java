@@ -296,6 +296,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 * Return the dependency comparator for this BeanFactory (may be {@code null}).
 	 * @since 4.0
 	 */
+	/**
+	 * 返回这个 BeanFactory 的依赖比较器(可以为{@code null})。
+	 * @return
+	 */
 	@Nullable
 	public Comparator<Object> getDependencyComparator() {
 		return this.dependencyComparator;

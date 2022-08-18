@@ -44,6 +44,12 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.core.annotation.Order
  * @see javax.annotation.Priority
  */
+/**
+ * {@code AnnotationAwareOrderComparator} 是一个扩展 {@link OrderComparator} 支持 Spring 的 {@link org.springframework.core.Ordered}
+ * 接口以及 {@link Order @Order} 和 {@link javax.annotation.Priority @Priority} 注释，由 {@code Ordered} 提供顺序值，实例覆盖
+ * 一个静态定义的注释值(如果有)。
+ * 参考 Javadoc {@link OrderComparator} 的详细信息，非有序对象的排序语义。
+ */
 public class AnnotationAwareOrderComparator extends OrderComparator {
 
 	/**

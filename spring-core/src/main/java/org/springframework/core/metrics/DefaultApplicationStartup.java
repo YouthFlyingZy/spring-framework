@@ -27,6 +27,11 @@ import java.util.function.Supplier;
  *
  * @author Brian Clozel
  */
+
+/**
+ * 默认 “no op” {@code ApplicationStartup} 实现。
+ * 该变量是为最小开销而设计的，不记录事件。
+ */
 class DefaultApplicationStartup implements ApplicationStartup {
 
 	private static final DefaultStartupStep DEFAULT_STARTUP_STEP = new DefaultStartupStep();
