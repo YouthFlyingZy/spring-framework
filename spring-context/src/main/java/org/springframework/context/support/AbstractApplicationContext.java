@@ -334,6 +334,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * <p>If none specified, a default environment will be initialized via
 	 * {@link #createEnvironment()}.
 	 */
+	/**
+	 * 返回可配置的应用程序上下文的 {@code Environment} 形式，允许进一步定制。
+	 * 如果没有指定，默认环境将被初始化通过 {@link # createEnvironment()}。
+	 */
 	@Override
 	public ConfigurableEnvironment getEnvironment() {
 		if (this.environment == null) {

@@ -50,6 +50,19 @@ import org.springframework.util.ObjectUtils;
  * @see java.util.List#sort(java.util.Comparator)
  * @see java.util.Arrays#sort(Object[], java.util.Comparator)
  */
+/**
+ * {@link Comparator} 的实现，用于 {@link Ordered} 对象，按顺序值升序，分别按优先级降序。
+ *
+ * {@code PriorityOrdered} 对象
+ * {@link PriorityOrdered} 对象的排序优先级将高于普通的 {@code Ordered} 对象。
+ *
+ * 相同顺序对象
+ * 具有相同顺序值的对象将被任意排序，与其他具有相同顺序值的对象排序。
+ *
+ * Non-ordered 对象
+ * 任何不提供自己排序值对象都是隐式的赋值为 {@link Ordered#LOWEST_PRECEDENCE}，从而结束在一个已排序的集合的末尾，
+ * 以任意顺序其他具有相同顺序值的对象。
+ */
 public class OrderComparator implements Comparator<Object> {
 
 	/**

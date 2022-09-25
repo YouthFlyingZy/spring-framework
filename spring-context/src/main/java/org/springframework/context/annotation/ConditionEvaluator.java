@@ -46,7 +46,7 @@ import org.springframework.util.MultiValueMap;
  * @since 4.0
  */
 /**
- * 用于处理 {@link Conditional} 的内部类。
+ * 用于处理 {@link Conditional} 的注解的条件内部类。
  */
 class ConditionEvaluator {
 
@@ -55,6 +55,9 @@ class ConditionEvaluator {
 
 	/**
 	 * Create a new {@link ConditionEvaluator} instance.
+	 */
+	/**
+	 * 创建一个新的 {@link ConditionEvaluator} 实例。
 	 */
 	public ConditionEvaluator(@Nullable BeanDefinitionRegistry registry,
 			@Nullable Environment environment, @Nullable ResourceLoader resourceLoader) {

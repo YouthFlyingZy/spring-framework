@@ -184,6 +184,14 @@ public abstract class ClassUtils {
 	 * @see Thread#getContextClassLoader()
 	 * @see ClassLoader#getSystemClassLoader()
 	 */
+	/**
+	 * 返回默认的 ClassLoader 使用:通常是线程上下文 ClassLoader，如果可用; 装入 ClassUtils 的 ClassLoader 类将被用作后备。
+	 * 如果你打算使用线程上下文 ClassLoader，调用此方法在一个场景中，你显然更喜欢一个非空的 ClassLoader 引用:
+	 * 例如，用于类路径资源加载(但不一定用于 {@code Class.forName}，它同样接受 {@code null} 类加载器)。
+	 * @return 默认的 ClassLoader (只有{@code null}，如果甚至系统 ClassLoader无法访问
+	 * @see Thread#getContextClassLoader()
+	 * @see ClassLoader#getSystemClassLoader()
+	 */
 	@Nullable
 	public static ClassLoader getDefaultClassLoader() {
 		ClassLoader cl = null;
