@@ -88,6 +88,16 @@ import org.springframework.util.ClassUtils;
  * @author Sam Brannen
  * @since 3.0
  */
+
+/**
+ * {@link BeanFactoryPostProcessor} 用于引导处理 {@link Configuration @Configuration} 类。
+ *
+ * 在使用 {@code <context:annotation-config/>} 或 {@code <context:component-scan/>} 时默认注册。
+ * 否则，可以像其他 {@link BeanFactoryPostProcessor} 一样手动声明。
+ *
+ * 这个后处理器是按优先级排序的，因为在 {@code @Configuration} 类中声明的任何 {@link Bean @Bean} 方法都必须在执行任何其他
+ * {@code BeanFactoryPostProcessor} 之前注册相应的 Bean 定义。
+ */
 public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor,
 		PriorityOrdered, ResourceLoaderAware, ApplicationStartupAware, BeanClassLoaderAware, EnvironmentAware {
 

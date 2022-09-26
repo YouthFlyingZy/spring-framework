@@ -46,6 +46,10 @@ import org.springframework.util.Assert;
  * @author Juergen Hoeller
  * @since 4.0
  */
+/**
+ * 实现 {@link org.springframework.beans.factory.support.AutowireCandidateResolver} 策略接口，提供对限定符注释和延迟解析的支持
+ * 由注释包 {@code context.annotation} 上下文中的 {@link Lazy} 注释驱动。
+ */
 public class ContextAnnotationAutowireCandidateResolver extends QualifierAnnotationAutowireCandidateResolver {
 
 	@Override

@@ -80,6 +80,11 @@ public interface BeanDefinition extends AttributeAccessor, BeanMetadataElement {
 	 * used when registering beans that are completely part of the internal workings
 	 * of a {@link org.springframework.beans.factory.parsing.ComponentDefinition}.
 	 */
+	/**
+	 * 角色提示，表示 {@code BeanDefinition} 提供的是完全的后台角色，与最终用户无关。
+	 * 当注册的 bean 完全是内部工作 {@link org.springframework.beans.factory.parsing.ComponentDefinition}
+	 * 的一部分的 bean 时，会使用这个提示
+	 */
 	int ROLE_INFRASTRUCTURE = 2;
 
 
