@@ -81,6 +81,10 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * @param registry the {@code BeanFactory} to load bean definitions into, in the form
 	 * of a {@code BeanDefinitionRegistry}
 	 */
+	/**
+	 * 为给定的 bean 工厂创建新的 {@code ClassPathBeanDefinitionScanner}。
+	 * @param registry {@code BeanFactory} 用来加载 bean 定义，在 bean 定义注册表中 {@code BeanDefinitionRegistry}
+	 */
 	public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry) {
 		this(registry, true);
 	}
@@ -247,6 +251,11 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * Perform a scan within the specified base packages.
 	 * @param basePackages the packages to check for annotated classes
 	 * @return number of beans registered
+	 */
+	/**
+	 * 在指定的基本包内执行扫描。
+	 * @param basePackages 包检查注解类
+	 * @return 注册的 bean 数量
 	 */
 	public int scan(String... basePackages) {
 		int beanCountAtScanStart = this.registry.getBeanDefinitionCount();

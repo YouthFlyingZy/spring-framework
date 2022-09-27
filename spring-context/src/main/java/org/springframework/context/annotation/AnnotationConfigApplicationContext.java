@@ -179,10 +179,10 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 */
 	/**
 	 * 注册一个或多个要处理的组件类。
-	 * 注意:{@link #refresh()} 必须按照上下文的顺序调用来完全处理新类。
+	 * 注意 {@link #refresh()} 必须按照上下文的顺序调用来完全处理新类。
 	 * @param componentClasses 一个或多个组件类，例如 {@link Configuration @Configuration} 类
-	 * * @see #scan(String…)
-	 * * @see # refresh ()
+	 * @see #scan(String...)
+	 * @see #refresh()
 	 */
 	@Override
 	public void register(Class<?>... componentClasses) {

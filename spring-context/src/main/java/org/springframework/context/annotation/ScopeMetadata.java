@@ -32,6 +32,10 @@ import org.springframework.util.Assert;
  * @see ScopeMetadataResolver
  * @see ScopedProxyMode
  */
+/**
+ * 描述 Spring 管理的 bean 的范围特征，包括范围名称和作用域代理行为。
+ * 默认范围是 “单例”，并且默认是不创建范围代理。
+ */
 public class ScopeMetadata {
 
 	private String scopeName = BeanDefinition.SCOPE_SINGLETON;

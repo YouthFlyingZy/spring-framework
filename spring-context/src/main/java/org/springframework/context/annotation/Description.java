@@ -30,6 +30,9 @@ import java.lang.annotation.Target;
  * @since 4.0
  * @see org.springframework.beans.factory.config.BeanDefinition#getDescription()
  */
+/**
+ * 将文本描述添加到派生自的 bean 定义
+ */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -37,6 +40,9 @@ public @interface Description {
 
 	/**
 	 * The textual description to associate with the bean definition.
+	 */
+	/**
+	 * 与 bean 定义关联的文本描述。
 	 */
 	String value();
 

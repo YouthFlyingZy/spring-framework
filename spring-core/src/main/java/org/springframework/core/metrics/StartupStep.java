@@ -92,6 +92,9 @@ public interface StartupStep {
 	 * Record the state of the step and possibly other metrics like execution time.
 	 * <p>Once ended, changes on the step state are not allowed.
 	 */
+	/**
+	 * 记录步骤的状态和其他指标，如执行时间。一旦结束，不允许改变步骤状态。
+	 */
 	void end();
 
 

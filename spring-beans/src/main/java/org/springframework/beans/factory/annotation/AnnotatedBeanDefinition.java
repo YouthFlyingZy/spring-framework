@@ -31,6 +31,11 @@ import org.springframework.lang.Nullable;
  * @see AnnotatedGenericBeanDefinition
  * @see org.springframework.core.type.AnnotationMetadata
  */
+/**
+ * 扩展 {@link org.springframework.beans.factory.config.BeanDefinition} 接口
+ * 从而暴露 {@link org.springframework.core.type.AnnotationMetadata} 的接口
+ * 关于它的 bean 类-不需要加载类。
+ */
 public interface AnnotatedBeanDefinition extends BeanDefinition {
 
 	/**
