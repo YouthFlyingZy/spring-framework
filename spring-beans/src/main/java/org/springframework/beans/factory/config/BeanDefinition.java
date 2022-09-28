@@ -75,6 +75,12 @@ public interface BeanDefinition extends AttributeAccessor, BeanMetadataElement {
 	 * {@link org.springframework.beans.factory.parsing.ComponentDefinition},
 	 * but not when looking at the overall configuration of an application.
 	 */
+	/**
+	 * 角色提示表明 {@code BeanDefinition} 是某些较大配置的支持部分，通常是外部
+	 * {@link org.springframework.beans.factory.parsing.ComponentDefinition}.
+	 * {@code SUPPORT} bean 被认为足够重要，在更仔细地查看特定的 {@link org.springframework.beans.factory.parsing.ComponentDefinition}
+	 * 时会意识到，但在查看应用程序的整体配置时则不会。
+	 */
 	int ROLE_SUPPORT = 1;
 
 	/**
@@ -84,9 +90,8 @@ public interface BeanDefinition extends AttributeAccessor, BeanMetadataElement {
 	 * of a {@link org.springframework.beans.factory.parsing.ComponentDefinition}.
 	 */
 	/**
-	 * 角色提示，表示 {@code BeanDefinition} 提供的是完全的后台角色，与最终用户无关。
-	 * 当注册的 bean 完全是内部工作 {@link org.springframework.beans.factory.parsing.ComponentDefinition}
-	 * 的一部分的 bean 时，会使用这个提示
+	 * 指示 {@code BeanDefinition} 提供完全后台角色且与最终用户无关的角色提示。
+	 * 在注册完全属于 {@link org.springframework.beans.factory.parsing.ComponentDefinition} 内部工作的 bean 时使用此提示。
 	 */
 	int ROLE_INFRASTRUCTURE = 2;
 

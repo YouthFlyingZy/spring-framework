@@ -155,6 +155,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private String serializationId;
 
 	/** Whether to allow re-registration of a different definition with the same name. */
+	/**
+	 * 是否允许重新注册具有相同名称的不同定义
+	 */
 	private boolean allowBeanDefinitionOverriding = true;
 
 	/** Whether to allow eager class loading even for lazy-init beans. */
@@ -181,22 +184,40 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private final Map<String, BeanDefinitionHolder> mergedBeanDefinitionHolders = new ConcurrentHashMap<>(256);
 
 	/** Map of singleton and non-singleton bean names, keyed by dependency type. */
+	/**
+	 * 单例和非单例 bean 名称的映射，以依赖类型为键。
+	 */
 	private final Map<Class<?>, String[]> allBeanNamesByType = new ConcurrentHashMap<>(64);
 
 	/** Map of singleton-only bean names, keyed by dependency type. */
+	/**
+	 * 仅单例 bean 名称的映射，由依赖类型键入。
+	 */
 	private final Map<Class<?>, String[]> singletonBeanNamesByType = new ConcurrentHashMap<>(64);
 
 	/** List of bean definition names, in registration order. */
+	/**
+	 * bean 定义名称列表，按注册顺序排列
+	 */
 	private volatile List<String> beanDefinitionNames = new ArrayList<>(256);
 
 	/** List of names of manually registered singletons, in registration order. */
+	/**
+	 * 手动注册单例的名称列表，按注册顺序。
+	 */
 	private volatile Set<String> manualSingletonNames = new LinkedHashSet<>(16);
 
 	/** Cached array of bean definition names in case of frozen configuration. */
+	/**
+	 * 在冻结配置的情况下缓存 bean 定义名称的数组。
+	 */
 	@Nullable
 	private volatile String[] frozenBeanDefinitionNames;
 
 	/** Whether bean definition metadata may be cached for all beans. */
+	/**
+	 * 是否可以为所有 bean 缓存 bean 定义元数据。
+	 */
 	private volatile boolean configurationFrozen;
 
 
@@ -258,6 +279,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 * Return whether it should be allowed to override bean definitions by registering
 	 * a different definition with the same name, automatically replacing the former.
 	 * @since 4.1.2
+	 */
+	/**
+	 * 返回是否应允许通过注册具有相同名称的不同定义来覆盖 bean 定义，自动替换前者。
+	 * @return
 	 */
 	public boolean isAllowBeanDefinitionOverriding() {
 		return this.allowBeanDefinitionOverriding;
@@ -1007,7 +1032,12 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	//---------------------------------------------------------------------
 	// Implementation of BeanDefinitionRegistry interface
 	//---------------------------------------------------------------------
-
+	/**
+	 * BeanDefinitionRegistry 接口的实现
+	 * @param beanName 要注册的 bean 实例的名称
+	 * @param beanDefinition 要注册的 bean 实例定义
+	 * @throws BeanDefinitionStoreException
+	 */
 	@Override
 	public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)
 			throws BeanDefinitionStoreException {
@@ -1032,6 +1062,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			}
 			else if (existingDefinition.getRole() < beanDefinition.getRole()) {
 				// e.g. was ROLE_APPLICATION, now overriding with ROLE_SUPPORT or ROLE_INFRASTRUCTURE
+				// 例如 是 ROLE_APPLICATION，现在被 ROLE_SUPPORT 或 ROLE_INFRASTRUCTURE 覆盖
 				if (logger.isInfoEnabled()) {
 					logger.info("Overriding user-defined bean definition for bean '" + beanName +
 							"' with a framework-generated bean definition: replacing [" +
@@ -1057,6 +1088,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		else {
 			if (hasBeanCreationStarted()) {
 				// Cannot modify startup-time collection elements anymore (for stable iteration)
+				// 无法再修改启动时集合元素（用于稳定迭代）
 				synchronized (this.beanDefinitionMap) {
 					this.beanDefinitionMap.put(beanName, beanDefinition);
 					List<String> updatedDefinitions = new ArrayList<>(this.beanDefinitionNames.size() + 1);
@@ -1068,6 +1100,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			}
 			else {
 				// Still in startup registration phase
+				// 仍处于启动注册阶段
 				this.beanDefinitionMap.put(beanName, beanDefinition);
 				this.beanDefinitionNames.add(beanName);
 				removeManualSingletonName(beanName);
@@ -1123,25 +1156,37 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 * @see #registerBeanDefinition
 	 * @see #removeBeanDefinition
 	 */
+	/**
+	 * 重置给定 bean 的所有 bean 定义缓存，包括从它派生的 bean 的缓存。
+	 * 在现有 bean 定义被替换或删除后调用，触发 {@link #clearMergedBeanDefinition}、{@link #destroySingleton} 和
+	 * {@link MergedBeanDefinitionPostProcessor#resetBeanDefinition} 在给定的 bean 和以给定 bean 作为父级的所有 bean 定义上。
+	 * @param beanName 要重置的 bean 的名称
+	 */
 	protected void resetBeanDefinition(String beanName) {
 		// Remove the merged bean definition for the given bean, if already created.
+		// 删除给定 bean 的合并 bean 定义（如果已创建）。
 		clearMergedBeanDefinition(beanName);
 
 		// Remove corresponding bean from singleton cache, if any. Shouldn't usually
 		// be necessary, rather just meant for overriding a context's default beans
 		// (e.g. the default StaticMessageSource in a StaticApplicationContext).
+		// 如果有的话，从单例缓存中删除相应的 bean。 通常不需要，而只是用于覆盖上下文的默认 bean
+		// （例如，StaticApplicationContext 中的默认 StaticMessageSource）。
 		destroySingleton(beanName);
 
 		// Notify all post-processors that the specified bean definition has been reset.
+		// 通知所有后处理器指定的 bean 定义已被重置。
 		for (MergedBeanDefinitionPostProcessor processor : getBeanPostProcessorCache().mergedDefinition) {
 			processor.resetBeanDefinition(beanName);
 		}
 
 		// Reset all bean definitions that have the given bean as parent (recursively).
+		// 重置以给定 bean 作为父级的所有 bean 定义（递归）。
 		for (String bdName : this.beanDefinitionNames) {
 			if (!beanName.equals(bdName)) {
 				BeanDefinition bd = this.beanDefinitionMap.get(bdName);
 				// Ensure bd is non-null due to potential concurrent modification of beanDefinitionMap.
+				// 由于 beanDefinitionMap 的潜在并发修改，请确保 bd 不为空。
 				if (bd != null && beanName.equals(bd.getParentName())) {
 					resetBeanDefinition(bdName);
 				}
@@ -1200,9 +1245,16 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 * @param condition a precondition for the modification action
 	 * (if this condition does not apply, the action can be skipped)
 	 */
+	/**
+	 * 更新工厂的内部手动单例名称集。
+	 * @param action 修改动作
+	 * @param condition 修改动作的前提条件
+	 * 如果此条件不适用，可以跳过该操作）
+	 */
 	private void updateManualSingletonNames(Consumer<Set<String>> action, Predicate<Set<String>> condition) {
 		if (hasBeanCreationStarted()) {
 			// Cannot modify startup-time collection elements anymore (for stable iteration)
+			// 无法再修改启动时集合元素（用于稳定迭代）
 			synchronized (this.beanDefinitionMap) {
 				if (condition.test(this.manualSingletonNames)) {
 					Set<String> updatedSingletons = new LinkedHashSet<>(this.manualSingletonNames);
@@ -1213,6 +1265,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		}
 		else {
 			// Still in startup registration phase
+			// 仍处于启动注册阶段
 			if (condition.test(this.manualSingletonNames)) {
 				action.accept(this.manualSingletonNames);
 			}
@@ -1221,6 +1274,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 	/**
 	 * Remove any assumptions about by-type mappings.
+	 */
+	/**
+	 * 删除关于按类型映射的任何假设。
 	 */
 	private void clearByTypeCache() {
 		this.allBeanNamesByType.clear();

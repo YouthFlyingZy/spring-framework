@@ -59,6 +59,14 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * @see RootBeanDefinition
 	 * @see ChildBeanDefinition
 	 */
+	/**
+	 * 使用此注册表注册一个新的 bean 定义。
+	 * 必须支持 RootBeanDefinition 和 ChildBeanDefinition。
+	 * @param beanName 要注册的 bean 实例的名称
+	 * @param beanDefinition 要注册的 bean 实例定义
+	 * @throws BeanDefinitionStoreException 如果 BeanDefinition 无效
+	 * @throws BeanDefinitionOverrideException 如果指定的 bean 名称已经存在 BeanDefinition 并且我们不允许覆盖它
+	 */
 	void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)
 			throws BeanDefinitionStoreException;
 

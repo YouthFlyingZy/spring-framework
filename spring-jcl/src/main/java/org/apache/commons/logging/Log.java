@@ -94,6 +94,11 @@ public interface Log {
 	 * when the log level is more than info.
 	 * @return true if info is enabled in the underlying logger.
 	 */
+	/**
+	 * 当前是否启用了信息记录？
+	 * 调用此方法以防止在日志级别高于信息时必须执行昂贵的操作（例如，<code>String</code> 连接）。
+	 * @return 如果在底层记录器中启用了信息，则返回 true。
+	 */
 	boolean isInfoEnabled();
 
 	/**

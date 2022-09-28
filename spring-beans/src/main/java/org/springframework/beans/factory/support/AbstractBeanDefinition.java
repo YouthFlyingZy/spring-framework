@@ -756,6 +756,12 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * @see #setConstructorArgumentValues(ConstructorArgumentValues)
 	 * @see #setPropertyValues(MutablePropertyValues)
 	 */
+	/**
+	 * 指定创建 bean 实例的回调，作为声明式指定工厂方法的替代方法。
+	 * 如果设置了这样的回调，它将覆盖任何其他构造函数或工厂方法元数据。
+	 * bean 属性填充和潜在的注释驱动注入仍将照常适用。
+	 * @param instanceSupplier
+	 */
 	public void setInstanceSupplier(@Nullable Supplier<?> instanceSupplier) {
 		this.instanceSupplier = instanceSupplier;
 	}
@@ -1112,6 +1118,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * Validate this bean definition.
 	 * @throws BeanDefinitionValidationException in case of validation failure
 	 */
+	/**
+	 * 验证这个 bean 定义。
+	 * @throws BeanDefinitionValidationException 在验证失败的情况下
+	 */
 	public void validate() throws BeanDefinitionValidationException {
 		if (hasMethodOverrides() && getFactoryMethodName() != null) {
 			throw new BeanDefinitionValidationException(
@@ -1128,8 +1138,14 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * Checks for existence of a method with the specified name.
 	 * @throws BeanDefinitionValidationException in case of validation failure
 	 */
+	/**
+	 * 验证并准备为此 bean 定义的方法覆盖。
+	 * 检查是否存在具有指定名称的方法。
+	 * @throws BeanDefinitionValidationException 在验证失败的情况下
+	 */
 	public void prepareMethodOverrides() throws BeanDefinitionValidationException {
 		// Check that lookup methods exist and determine their overloaded status.
+		// 检查查找方法是否存在并确定它们的重载状态。
 		if (hasMethodOverrides()) {
 			getMethodOverrides().getOverrides().forEach(this::prepareMethodOverride);
 		}

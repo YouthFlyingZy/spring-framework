@@ -51,6 +51,16 @@ import org.springframework.util.ClassUtils;
  * @since 2.0
  * @see #setProxyTargetClass
  */
+
+/**
+ * 用于作用域对象的便捷代理工厂 bean。
+ *
+ * 使用这个工厂 bean 创建的代理是线程安全的单例，可以被注入到共享对象中，具有透明的作用域行为。
+ *
+ * 此类返回的代理实现 {@link ScopedObject} 接口。这目前允许从范围中删除相应的对象，在下次访问时在范围内无缝创建新实例。
+ *
+ * 请注意，这个工厂创建的代理默认是基于类的代理。 这可以通过将 “proxyTargetClass” 属性切换为 “false” 来定制。
+ */
 @SuppressWarnings("serial")
 public class ScopedProxyFactoryBean extends ProxyConfig
 		implements FactoryBean<Object>, BeanFactoryAware, AopInfrastructureBean {

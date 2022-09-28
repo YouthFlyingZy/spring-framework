@@ -40,6 +40,14 @@ public interface ScopeMetadataResolver {
 	 * @param definition the target bean definition
 	 * @return the relevant scope metadata; never {@code null}
 	 */
+	/**
+	 * 解析适用于提供的 bean {@code definition} 的 {@link ScopeMetadata}。
+	 * 实现当然可以使用他们喜欢的任何策略来确定元数据范围，但是一些实现立即想到的可能是使用提供的
+	 * {@code definition} 的 {@link BeanDefinition#getBeanClassName() the class} 上的源代码级别注释，
+	 * 或者使用存在于 {@link BeanDefinition#attributeNames()} 的元数据提供 {@code definition}。
+	 * @param definition 目标 bean 定义
+	 * @return 相关范围元数据； 从不 {@code null}
+	 */
 	ScopeMetadata resolveScopeMetadata(BeanDefinition definition);
 
 }
